@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Live Stream e Webstream Local</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #f4f4f9;
+        }
+        .container-video {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto 20px auto;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: scaleX(-1); /* Efeito de espelho para parecer mais natural */
+        }
+        .botoes-container {
+            margin-top: 15px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            text-decoration: none;
+        }
+        /* Cor do botão da Câmara Local */
+        .btn-camera {
+            background-color: #00b0ff;
+            color: white;
+        }
+        .btn-camera:hover {
+            background-color: #0091ea;
+        }
+        /* Cor do botão do YouTube */
+        .btn-youtube {
+            background-color: #ff0000;
+            color: white;
+        }
+        .btn-youtube:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Minha Webstream Local</h1>
+    
+    <!-- Ecrã da câmara local ativa -->
+    <div class="container-video">
+        <video id="webcam" autoplay playsinline></video>
+    </div>
+
+    <div class="botoes-container">
+        <!-- Ação 1: Ligar a câmara do PC na página -->
+        <button class="btn btn-camera" onclick="iniciarCamara()">
+            Ligar Câmara Local 📷
+        </button>
+
+        <!-- Ação 2: Cruzamento com os teus links do YouTube -->
+        <button class="btn btn-youtube" onclick="window.open('https://www.youtube.com/live/aFgzHeENrEw', '_blank')">
+            Ir para a Live Stream 🎥
+        </button>
+        
+        <button class="btn btn-youtube" onclick="window.open('https://www.youtube.com/@AgentFOwca', '_blank')">
+            Ver o Canal do YouTube 🔴
+        </button>
+    </div>
+
+    <script>
+        async function iniciarCamara() {
+            try {
+                // Solicita acesso à webcam
+                const fluxo = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                const elementoVideo = document.getElementById('webcam');
+                elementoVideo.srcObject = fluxo;
+            } catch (erro) {
+                console.error("Erro ao aceder à webcam:", erro);
+                alert("Não foi possível aceder à câmara. Certifica-te de que permitiste o acesso no navegador.");
+            }
+        }
+    </script>
+
+</body>
+</html>
